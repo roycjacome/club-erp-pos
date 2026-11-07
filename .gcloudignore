@@ -1,0 +1,15 @@
+# Defaults / noise
+.git
+.gitignore
+.gcloudignore
+.DS_Store
+
+# Nunca subas node_modules ni builds locales
+node_modules
+**/node_modules
+dist
+**/dist
+
+# Asegura que Dockerfile y patches SI entren
+!Dockerfile
+!patches/**

@@ -1,0 +1,28 @@
+name: Sync to Manus Cloud
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Manus Cloud Redeploy
+        run: |
+          curl -X POST https://manus-api.example.com/webhooks/redeploy \
+            -H "Authorization: Bearer ${{ secrets.MANUS_WEBHOOK_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "branch": "${{ github.ref_name }}",
+              "commit": "${{ github.sha }}",
+              "timestamp": "'$(date -u +'%Y-%m-%dT%H:%M:%SZ')'"
+            }'
+
+      - name: Trigger GCS Cloud Run Redeploy
+        run: |
+          curl -X POST https://cloudfunctions.net/redeploy-n8n \
+            -H "Authorization: Bearer ${{ secrets.GCS_WEBHOOK_TOKEN }}" \
+            -d "branch=${{ github.ref_name }}"

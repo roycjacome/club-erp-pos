@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771632234576,
+      "tag": "0000_slimy_ma_gnuci",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771632378548,
+      "tag": "0001_icy_manta",
+      "breakpoints": true
+    }
+  ]
+}

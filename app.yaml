@@ -1,0 +1,32 @@
+runtime: nodejs20
+
+env: standard
+
+entrypoint: npm start
+
+env_variables:
+  NODE_ENV: "production"
+  DATABASE_TYPE: "CLOUDSQL"
+  # Configura estas variables según tu entorno
+  # DB_HOST: "your_cloud_sql_host"
+  # DB_PORT: "5432"
+  # DB_USER: "your_db_user"
+  # DB_PASSWORD: "your_db_password"
+  # DB_NAME: "ccc_playa_palmas"
+
+handlers:
+  - url: /api/.*
+    script: auto
+    secure: always
+  - url: /.*
+    script: auto
+    secure: always
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+  min_idle_instances: 0
+  max_idle_instances: 2
+  standard_scheduler_settings:
+    target_cpu_utilization: 0.6
+    target_throughput_utilization: 0.6
